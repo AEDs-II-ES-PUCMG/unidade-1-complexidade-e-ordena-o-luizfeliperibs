@@ -46,13 +46,17 @@ public class SelectionSort<T extends Comparable<T>> implements IOrdenador<T>{
         T[] dadosOrdenados = Arrays.copyOf(dados, dados.length);
         int tamanho = dadosOrdenados.length;
         iniciar();
-        for (int i = tamanho - 1; i > 0; i--) {
-            for (int j = 0; j < i; j++) {
-                comparacoes++;
-                if ((dadosOrdenados[j].compareTo(dadosOrdenados[j+1]) > 0))
-                swap (j, j + 1, dadosOrdenados);
-            }
-        }	
+        for (int i = 0; i < (tamanho - 1); i++) {
+        	int menor = i;
+         	for (int j = (i + 1); j < tamanho; j++) {
+            		if (dadosOrdenados[menor].compareTo(dadosOrdenados[j]) > 0) {
+               			menor = j;
+            		}
+         	}
+      		T temp = dadosOrdenados[i];
+      		dadosOrdenados[i] = dadosOrdenados[menor];
+      		dadosOrdenados[menor] = temp;
+      	}
         terminar();
         return dadosOrdenados;
     }

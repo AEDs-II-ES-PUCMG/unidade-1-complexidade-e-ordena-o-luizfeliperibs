@@ -38,21 +38,84 @@ public class App {
 
 
     public static void main(String[] args) {
-        int tam = 20;
-        Integer[] vetor = gerarVetorObjetos(tam);
 
-        BubbleSort<Integer> bolha = new BubbleSort<>();
+        System.out.println("Testes com vetores de tamanho pequeno:");
 
-        Integer[] vetorOrdenadoBolha = bolha.ordenar(vetor);
+        for(int i=0; i < tamanhosTestePequeno.length; i++){
 
-        System.out.println("\nVetor ordenado método Bolha:");
-        System.out.println("Comparações: " + bolha.getComparacoes());
-        System.out.println("Movimentações: " + bolha.getMovimentacoes());
-        System.out.println("Tempo de ordenação (ms): " + bolha.getTempoOrdenacao());
+            int tam = tamanhosTestePequeno[i];
 
-        /* TO DO
-        *Fazer a implementacao do restante do main para a ordenacao 
-        *  com os algoritmos InsertionSort e SelectionSort
-        */
+            System.out.println("\n\nTeste com vetor de tamanho: " + tam);
+
+            Integer[] vetor = gerarVetorObjetos(tam);
+
+            BubbleSort<Integer> bolha = new BubbleSort<>();
+
+            Integer[] vetorOrdenadoBolha = bolha.ordenar(vetor);
+
+            System.out.println("\nVetor ordenado método Bolha:");
+            System.out.println("Comparações: " + bolha.getComparacoes());
+            System.out.println("Movimentações: " + bolha.getMovimentacoes());
+            System.out.println("Tempo de ordenação (ms): " + bolha.getTempoOrdenacao());
+
+            InsertionSort<Integer> insercao = new InsertionSort<>();
+
+            Integer[] vetorOrdenadoInsercao = insercao.ordenar(vetor);
+
+            System.out.println("\nVetor ordenado método Inserção:");
+            System.out.println("Comparações: " + insercao.getComparacoes());
+            System.out.println("Movimentações: " + insercao.getMovimentacoes());
+            System.out.println("Tempo de ordenação (ms): " + insercao.getTempoOrdenacao());
+
+            SelectionSort<Integer> selecao = new SelectionSort<>();
+
+            Integer[] vetorOrdenadoSelecao = selecao.ordenar(vetor);
+
+            System.out.println("\nVetor ordenado método Seleção:");
+            System.out.println("Comparações: " + selecao.getComparacoes());
+            System.out.println("Movimentações: " + selecao.getMovimentacoes());
+            System.out.println("Tempo de ordenação (ms): " + selecao.getTempoOrdenacao());
+
+        }
+
+        System.out.println("Testes com vetores de tamanho médio:");
+
+        for(int i=0; i < tamanhosTesteMedio.length; i++){
+
+            int tam = tamanhosTesteMedio[i];
+
+            System.out.println("\n\nTeste com vetor de tamanho: " + tam);
+
+            Integer[] vetor = gerarVetorObjetos(tam);
+
+            BubbleSort<Integer> bolha = new BubbleSort<>();
+
+            Integer[] vetorOrdenadoBolha = bolha.ordenar(vetor);
+
+            System.out.println("\nVetor ordenado método Bolha:");
+            System.out.println("Comparações: " + bolha.getComparacoes());
+            System.out.println("Movimentações: " + bolha.getMovimentacoes());
+            System.out.println("Tempo de ordenação (ms): " + bolha.getTempoOrdenacao());
+
+            InsertionSort<Integer> insercao = new InsertionSort<>();
+
+            Integer[] vetorOrdenadoInsercao = insercao.ordenar(vetor);
+
+            System.out.println("\nVetor ordenado método Inserção:");
+            System.out.println("Comparações: " + insercao.getComparacoes());
+            System.out.println("Movimentações: " + insercao.getMovimentacoes());
+            System.out.println("Tempo de ordenação (ms): " + insercao.getTempoOrdenacao());
+
+            SelectionSort<Integer> selecao = new SelectionSort<>();
+
+            Integer[] vetorOrdenadoSelecao = selecao.ordenar(vetor);
+
+            System.out.println("\nVetor ordenado método Seleção:");
+            System.out.println("Comparações: " + selecao.getComparacoes());
+            System.out.println("Movimentações: " + selecao.getMovimentacoes());
+            System.out.println("Tempo de ordenação (ms): " + selecao.getTempoOrdenacao());
+
+        }
+
     }
 }
