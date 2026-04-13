@@ -186,7 +186,7 @@ public class AppOficina {
             Produto[] produtosOrdenados;
             switch (opcaoComparador){
                 case 1: produtosOrdenados = ordenador.ordenar(produtos, comparadorPorDescricao);
-                case 2: produtosOrdenados = ordenador.ordenar(produtos, comparadorPorDescricao);
+                case 2: produtosOrdenados = ordenador.ordenar(produtos, comparadorPorCodigo);
             }
         }
         

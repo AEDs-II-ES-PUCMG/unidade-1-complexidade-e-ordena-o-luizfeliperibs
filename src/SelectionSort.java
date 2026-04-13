@@ -6,8 +6,8 @@ import java.util.Comparator;
 public class SelectionSort<T extends Comparable<T>> implements IOrdenador<T>{
     private long comparacoes;
 	private long movimentacoes;
-	private LocalDateTime inicio;
-	private LocalDateTime termino;	
+	private long inicio;
+	private long termino;	
 	
 	public SelectionSort() {
 		comparacoes = 0;
@@ -24,7 +24,7 @@ public class SelectionSort<T extends Comparable<T>> implements IOrdenador<T>{
 		T[] dadosOrdenados = Arrays.copyOf(dados, dados.length);
 		int tamanho = dadosOrdenados.length;
 		
-		inicio = LocalDateTime.now();
+		inicio = System.nanoTime();
 		
 		for (int posReferencia = 0; posReferencia < tamanho ; posReferencia++) {
             int posMenor = posReferencia;
@@ -36,7 +36,7 @@ public class SelectionSort<T extends Comparable<T>> implements IOrdenador<T>{
 			}
 			swap(posReferencia, posMenor, dadosOrdenados);
 		}	
-		termino = LocalDateTime.now();
+		termino = System.nanoTime();
 
 		return dadosOrdenados;
 	}

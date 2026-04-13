@@ -7,8 +7,8 @@ public class Mergesort<T extends Comparable<T>> implements IOrdenador<T>{
     
         private long comparacoes;
         private long movimentacoes;
-        private LocalDateTime inicio;
-        private LocalDateTime termino;
+        private long inicio;
+        private long termino;
         private T[] dadosOrdenados;
         private Comparator<T> comparador;
         
@@ -27,10 +27,18 @@ public class Mergesort<T extends Comparable<T>> implements IOrdenador<T>{
             this.comparador = comparador;
             int tamanho = dados.length;
             dadosOrdenados = Arrays.copyOf(dados, tamanho);
-            inicio = LocalDateTime.now();
+            inicio = System.nanoTime();
             mergesort(0, tamanho-1);
-            termino = LocalDateTime.now();
+            termino = System.nanoTime();
             return dadosOrdenados;
+        }
+
+        public double getTempoOrdenacao() {
+           return termino - inicio;
+        }
+
+        public double getTempoMs() {
+           return (termino - inicio) / 1_000_000.0;
         }
     
         private T[] mergesort(int ini, int fim){
@@ -83,9 +91,5 @@ public class Mergesort<T extends Comparable<T>> implements IOrdenador<T>{
             return movimentacoes;
         }
         
-        public double getTempoOrdenacao() {
-            return 0;
-        }
-
 }
 

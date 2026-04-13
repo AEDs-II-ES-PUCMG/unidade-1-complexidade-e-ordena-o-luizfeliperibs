@@ -8,8 +8,8 @@ public class Bubblesort<T extends Comparable<T>> implements IOrdenador<T>{
 
 	private long comparacoes;
 	private long movimentacoes;
-	private LocalDateTime inicio;
-	private LocalDateTime termino;	
+	private long inicio;
+	private long termino;	
 	
 	public Bubblesort() {
 		comparacoes = 0;
@@ -26,7 +26,7 @@ public class Bubblesort<T extends Comparable<T>> implements IOrdenador<T>{
 		T[] dadosOrdenados = Arrays.copyOf(dados, dados.length);
 		int tamanho = dadosOrdenados.length;
 		
-		inicio = LocalDateTime.now();
+		inicio = System.nanoTime();
 		
 		for (int posReferencia = tamanho - 1; posReferencia > 0; posReferencia--) {
 			int trocas = 0;
@@ -40,10 +40,18 @@ public class Bubblesort<T extends Comparable<T>> implements IOrdenador<T>{
 			if(trocas == 0 )
 				posReferencia = 0;
 		}	
-		termino = LocalDateTime.now();
+		termino = System.nanoTime();
 
 		return dadosOrdenados;
 	}
+
+    public double getTempoordenacao() {
+        return termino - inicio;
+    }
+
+    public double getTempoMs() {
+        return (termino - inicio) / 1_000_000.0;
+    }
 	
 	private void swap(int i, int j, T[] vet) {
 		movimentacoes++;
