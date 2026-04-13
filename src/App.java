@@ -7,11 +7,29 @@ public class App {
     static final int[] tamanhosTesteMedio =   {     12_500,     25_000,      50_000,     100_000,     200_000 };
     static final int[] tamanhosTestePequeno = {          3,          6,          12,          24,          48 };
     static Random aleatorio = new Random();
-    
+
+    /**
+     * Gerador de vetores aleatórios de tamanho pré-definido. 
+     * @param tamanho Tamanho do vetor a ser criado.
+     * @return Vetor com dados aleatórios, com valores entre 1 e (tamanho/2), desordenado.
+     */
+    static int[] gerarVetor(int tamanho){
+        int[] vetor = new int[tamanho];
+        for (int i = 0; i < tamanho; i++) {
+            vetor[i] = aleatorio.nextInt(1, tamanho/2);
+        }
+        return vetor;        
+    }
+
+    /**
+     * Gerador de vetores de objetos do tipo Integer aleatórios de tamanho pré-definido. 
+     * @param tamanho Tamanho do vetor a ser criado.
+     * @return Vetor de Objetos Integer com dados aleatórios, com valores entre 1 e (tamanho/2), desordenado.
+     */
     static Integer[] gerarVetorObjetos(int tamanho) {
         Integer[] vetor = new Integer[tamanho];
         for (int i = 0; i < tamanho; i++) {
-            vetor[i] = aleatorio.nextInt(1, 10 * tamanho);
+            vetor[i] = aleatorio.nextInt(1, tamanho/2);
         }
         return vetor;
     }
