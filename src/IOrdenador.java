@@ -7,4 +7,5 @@ public interface IOrdenador<T extends Comparable<T>>{
     public long getComparacoes();
 	public long getMovimentacoes();
     public double getTempoOrdenacao();
+    //Calcular tempo total de ordenação gasto por método
 }

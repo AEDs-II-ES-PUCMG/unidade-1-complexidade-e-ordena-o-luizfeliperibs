@@ -93,6 +93,9 @@ public class AppOficina {
         System.out.println("0 - Finalizar");
        
         return lerNumero("Digite sua opção", Integer.class);
+
+        //Escolher o método de ordenação
+        //Sob qual critério
     }
 
     static int exibirMenuComparadores() {
@@ -137,6 +140,8 @@ public class AppOficina {
                 localizado = produtos[i];
         }
         return localizado;
+
+        //otimizar com pesquisa binária
     }
 
     private static void mostrarProduto(Produto produto) {
@@ -165,8 +170,26 @@ public class AppOficina {
     static void ordenarProdutos(){
         cabecalho();
         
-        int opcao = exibirMenuOrdenadores();
-        //Complete com a sua lógica
+        int opcaoOrdenador = exibirMenuOrdenadores();
+        
+        switch(opcaoOrdenador) {
+            case 1: ordenador = new Bubblesort<>();
+            case 2: ordenador = new InsertSort<>();
+            case 3: ordenador = new SelectionSort<>();
+            case 4: ordenador = new Mergesort<>();
+        }
+
+        if (ordenador != null){
+            ComparadorPorDescricao comparadorPorDescricao = new ComparadorPorDescricao();
+            ComparadorPorCodigo comparadorPorCodigo = new ComparadorPorCodigo();
+            int opcaoComparador = exibirMenuComparadores(); 
+            Produto[] produtosOrdenados;
+            switch (opcaoComparador){
+                case 1: produtosOrdenados = ordenador.ordenar(produtos, comparadorPorDescricao);
+                case 2: produtosOrdenados = ordenador.ordenar(produtos, comparadorPorDescricao);
+            }
+        }
+        
         ordenador = null;
     }
 
