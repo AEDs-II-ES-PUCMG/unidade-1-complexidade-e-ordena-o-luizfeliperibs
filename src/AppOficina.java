@@ -38,6 +38,8 @@ public class AppOficina {
     static int quantProdutos = 0;
     static String nomeArquivoDados = "produtos.txt";
     static IOrdenador<Produto> ordenador;
+    static Produto[] produtosPorId;
+    static Produto[] produtosPorDescricao;
 
     // #region utilidades
     static Scanner teclado;
@@ -94,8 +96,6 @@ public class AppOficina {
        
         return lerNumero("Digite sua opção", Integer.class);
 
-        //Escolher o método de ordenação
-        //Sob qual critério
     }
 
     static int exibirMenuComparadores() {
@@ -132,16 +132,55 @@ public class AppOficina {
     static Produto localizarProduto() {
         cabecalho();
         System.out.println("Localizando um produto");
-        int numero = lerNumero("Digite o identificador do produto", Integer.class);
-        Produto localizado = null;
-        
-        for (int i = 0; i < quantProdutos && localizado == null; i++) {
-            if (produtos[i].hashCode() == numero)
-                localizado = produtos[i];
-        }
-        return localizado;
 
-        //otimizar com pesquisa binária
+        int numero = lerNumero("Digite o identificador do produto", Integer.class);
+
+        int inicio = 0;
+        int fim = quantProdutos - 1;
+
+        while (inicio <= fim) {
+            int meio = (inicio + fim) / 2;
+
+            int codigoAtual = produtosPorId[meio].hashCode();
+
+            if (codigoAtual == numero) {
+                return produtosPorId[meio];
+            } else if (numero < codigoAtual) {
+                fim = meio - 1;
+            } else {
+                inicio = meio + 1;
+            }
+        }
+
+        return null;
+    }
+
+    static Produto localizarProdutoPorDescricao() {
+        cabecalho();
+        System.out.println("Localizando por descrição");
+
+        String descricao = teclado.nextLine();
+
+        int inicio = 0;
+        int fim = quantProdutos - 1;
+
+        while (inicio <= fim) {
+            int meio = (inicio + fim) / 2;
+
+            int comparacao = produtosPorDescricao[meio]
+                .toString()
+                .compareTo(descricao);
+
+            if (comparacao == 0) {
+                return produtosPorDescricao[meio];
+            } else if (comparacao > 0) {
+                fim = meio - 1;
+            } else {
+                inicio = meio + 1;
+            }
+        }
+
+        return null;
     }
 
     private static void mostrarProduto(Produto produto) {
@@ -217,6 +256,14 @@ public class AppOficina {
         
         produtos = carregarProdutos(nomeArquivoDados);
         embaralharProdutos();
+
+        // cria cópias
+        produtosPorId = Arrays.copyOf(produtos, quantProdutos);
+        produtosPorDescricao = Arrays.copyOf(produtos, quantProdutos);
+
+        // ordena
+        Arrays.sort(produtosPorId, new ComparadorPorCodigo());
+        Arrays.sort(produtosPorDescricao, new ComparadorPorDescricao());
 
         int opcao = -1;
         
