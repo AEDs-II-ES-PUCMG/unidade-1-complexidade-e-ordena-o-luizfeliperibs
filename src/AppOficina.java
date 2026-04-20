@@ -213,9 +213,16 @@ public class AppOficina {
         
         switch(opcaoOrdenador) {
             case 1: ordenador = new Bubblesort<>();
+            break;
             case 2: ordenador = new InsertSort<>();
+            break;
             case 3: ordenador = new SelectionSort<>();
+            break;
             case 4: ordenador = new Mergesort<>();
+            break;
+            default:
+                System.out.println("Opção inválida");
+                break;
         }
 
         if (ordenador != null){
