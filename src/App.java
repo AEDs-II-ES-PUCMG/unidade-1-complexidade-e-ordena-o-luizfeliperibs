@@ -31,7 +31,7 @@ import java.util.Scanner;
  * SOFTWARE.
  */
 
-public class AppOficina {
+public class App {
 
     static final int MAX_PEDIDOS = 100;
     static Produto[] produtos;
@@ -40,6 +40,8 @@ public class AppOficina {
     static IOrdenador<Produto> ordenador;
     static Produto[] produtosPorId;
     static Produto[] produtosPorDescricao;
+    static Produto[] produtosPorValor;
+    static Pedido[] pedidos;
 
     // #region utilidades
     static Scanner teclado;
@@ -89,19 +91,30 @@ public class AppOficina {
     static int exibirMenuOrdenadores() {
         cabecalho();
         System.out.println("1 - Bolha");
-        System.out.println("2 - Inserção");
-        System.out.println("3 - Seleção");
+        System.out.println("2 - Seleção");
+        System.out.println("3 - Inserção");
         System.out.println("4 - Mergesort");
+        System.out.println("4 - Heapsort");
         System.out.println("0 - Finalizar");
        
         return lerNumero("Digite sua opção", Integer.class);
 
     }
 
+    static int exibirMenuCriterios(){
+        cabecalho();
+        System.out.println("1 - Critério A: Valor final do pedido");
+        System.out.println("2 - Critério B: Volume total de itens");
+        System.out.println("3 - Critério C: Índice de economia");
+
+        return lerNumero("Digite sua opção: ", Integer.class);
+    }
+
     static int exibirMenuComparadores() {
         cabecalho();
-        System.out.println("1 - Padrão");
+        System.out.println("1 - Por descrição");
         System.out.println("2 - Por código");
+        System.out.println("3 - Por data");
         
         return lerNumero("Digite sua opção", Integer.class);
     }
@@ -153,6 +166,21 @@ public class AppOficina {
         }
 
         return null;
+    }
+
+    static void localizarPedidoPremium() {
+
+        double valorDeCorte = 0;
+
+        System.out.print("Qual o valor financeiro de corte? ");
+        valorDeCorte = teclado.nextDouble();
+
+        for (int i = 0; i<MAX_PEDIDOS; i++){
+            if (pedidos[i].valorFinal() > valorDeCorte){
+                pedidos[i].toString();
+            } 
+        }
+
     }
 
     static Produto localizarProdutoPorDescricao() {
@@ -212,14 +240,15 @@ public class AppOficina {
         int opcaoOrdenador = exibirMenuOrdenadores();
         
         switch(opcaoOrdenador) {
-            case 1: ordenador = new Bubblesort<>();
+            case 1: ordenador = new BubbleSort<>();
             break;
-            case 2: ordenador = new InsertSort<>();
+            case 2: ordenador = new SelectionSort<>();
             break;
-            case 3: ordenador = new SelectionSort<>();
+            case 3: ordenador = new InsertSort<>();
             break;
-            case 4: ordenador = new Mergesort<>();
+            case 4: ordenador = new MergeSort<>();
             break;
+            case 5: ordenador = new Heapsort<>();
             default:
                 System.out.println("Opção inválida");
                 break;
